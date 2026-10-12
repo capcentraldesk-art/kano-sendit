@@ -23,11 +23,11 @@ export default function HomePage() {
             A Bolt-style delivery app for local errands, food orders, packages, and urgent city mobility.
           </p>
           <div className="hero-actions">
-            <Link href="#features" className="primary-btn">
-              View Features
+            <Link href="/orders" className="primary-btn">
+              View Orders
             </Link>
-            <Link href="#ops" className="secondary-btn">
-              Explore Flow
+            <Link href="/dashboard" className="secondary-btn">
+              Driver Dashboard
             </Link>
           </div>
         </div>

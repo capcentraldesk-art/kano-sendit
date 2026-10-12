@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATASOURCE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String
+  role      String   @default("customer")
+  createdAt DateTime @default(now())
+  orders    Order[]
+}
+
+model Driver {
+  id          String   @id @default(cuid())
+  name        String
+  vehicleType String
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  orders      Order[]
+}
+
+model Order {
+  id             String   @id @default(cuid())
+  customerId     String?
+  customer       User?    @relation(fields: [customerId], references: [id])
+  driverId       String?
+  driver         Driver?  @relation(fields: [driverId], references: [id])
+  pickupLocation String
+  dropoffLocation String
+  itemType       String
+  notes          String?
+  status         String   @default("pending")
+  fare           Float    @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
